@@ -8,6 +8,8 @@ import org.task.abstracts.Food;
 import org.task.enums.PlantEating;
 import org.task.models.utils.AnimalsHelper;
 
+import java.util.StringJoiner;
+
 @Getter
 @ToString
 public class PlantEaterAnimal extends Animal {
@@ -19,6 +21,7 @@ public class PlantEaterAnimal extends Animal {
      *
      * @param type The value that will be set to this {@link #PlantEaterAnimal} instance.
      */
+
     public PlantEaterAnimal(PlantEating type) {
         if (type == null) throw new IllegalArgumentException("This type can't be null");
         this.type = type;
@@ -45,12 +48,14 @@ public class PlantEaterAnimal extends Animal {
      * Plant eaters can be eaten by meat eater animals
      *
      * @param animalDescription The value that needed to identify the type of animal
-     *
      * @return The result will be a value inform about that this animal has been eaten by meat eater
      */
 
     @Override
     public String consume(AnimalDescription animalDescription) {
-        return getType().getName() + " " + AnimalsHelper.HAS_BEEN_EATEN + " " + animalDescription.getName();
+        return new StringJoiner(" ")
+                .add(getType().getName())
+                .add(AnimalsHelper.HAS_BEEN_EATEN)
+                .add(animalDescription.getName()).toString();
     }
 }
