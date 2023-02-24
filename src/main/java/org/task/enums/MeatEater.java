@@ -5,6 +5,7 @@ import org.task.abstracts.AnimalDescription;
 /**
  * This Enum implements AnimalDescription to describe, which animal ate other animals or plants
  */
+
 public enum MeatEater implements AnimalDescription {
     LION("Lion");
 

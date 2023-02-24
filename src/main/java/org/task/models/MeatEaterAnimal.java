@@ -9,6 +9,7 @@ import org.task.enums.MeatEater;
 import org.task.models.utils.AnimalsHelper;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 @Getter
 @ToString
@@ -53,10 +54,14 @@ public class MeatEaterAnimal extends Animal {
     @Override
     public String consume(AnimalDescription animalDescription) {
         if (Objects.equals(getType().getName(), animalDescription.getName())) {
-            return AnimalsHelper.NOT_EAT;
+            return new StringJoiner(" ")
+                    .add(AnimalsHelper.HAS_NOT_BEEN_EATEN)
+                    .add(animalDescription.getName()).toString();
         } else {
-            return getType().getName() + " " +
-                    AnimalsHelper.HAS_BEEN_EATEN + " " + animalDescription.getName();
+            return new StringJoiner(" ")
+                    .add(getType().getName())
+                    .add(AnimalsHelper.HAS_BEEN_EATEN)
+                    .add(animalDescription.getName()).toString();
         }
     }
 }

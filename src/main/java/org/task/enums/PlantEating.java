@@ -5,6 +5,7 @@ import org.task.abstracts.AnimalDescription;
 /**
  * This Enum implements AnimalDescription to describe, which animal ate plants
  */
+
 public enum PlantEating implements AnimalDescription {
     COW("Cow"),
     GOAT("Goat");
@@ -20,6 +21,7 @@ public enum PlantEating implements AnimalDescription {
      *
      * @return The result will be a value that inform about animal type
      */
+
     public String getName() {
         return name;
     }
