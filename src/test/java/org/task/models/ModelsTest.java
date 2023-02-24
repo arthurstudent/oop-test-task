@@ -12,16 +12,16 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ModelsTest {
     MeatEaterAnimal lion;
-    PlantEatingAnimal cow;
-    PlantEatingAnimal goat;
+    PlantEaterAnimal cow;
+    PlantEaterAnimal goat;
 
     Grass grass;
 
     @BeforeAll
     void setUp() {
         lion = new MeatEaterAnimal(MeatEater.LION);
-        cow = new PlantEatingAnimal(PlantEating.COW);
-        goat = new PlantEatingAnimal(PlantEating.GOAT);
+        cow = new PlantEaterAnimal(PlantEating.COW);
+        goat = new PlantEaterAnimal(PlantEating.GOAT);
         grass = new Grass();
     }
 
@@ -47,7 +47,7 @@ class ModelsTest {
         String cowEatResult = cow.eat(cow);
         String goatEatResult = goat.eat(goat);
 
-        assertEquals(AnimalsHelper.NOT_EAT, lionEatResult);
+        assertEquals(AnimalsHelper.HAS_NOT_BEEN_EATEN + " " + lion.getType().getName(), lionEatResult);
         assertEquals(AnimalsHelper.NOT_EAT, cowEatResult);
         assertEquals(AnimalsHelper.NOT_EAT, goatEatResult);
     }

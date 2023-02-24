@@ -10,16 +10,16 @@ import org.task.models.utils.AnimalsHelper;
 
 @Getter
 @ToString
-public class PlantEatingAnimal extends Animal {
+public class PlantEaterAnimal extends Animal {
 
     private final PlantEating type;
 
     /**
      * Parameterized constructor.
      *
-     * @param type The value that will be set to this {@link #PlantEatingAnimal} instance.
+     * @param type The value that will be set to this {@link #PlantEaterAnimal} instance.
      */
-    public PlantEatingAnimal(PlantEating type) {
+    public PlantEaterAnimal(PlantEating type) {
         if (type == null) throw new IllegalArgumentException("This type can't be null");
         this.type = type;
     }
