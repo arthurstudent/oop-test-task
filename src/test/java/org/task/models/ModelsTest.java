@@ -5,10 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.task.enums.MeatEater;
 import org.task.enums.PlantEating;
-import org.task.utils.Utils;
+import org.task.models.utils.AnimalsHelper;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ModelsTest {
@@ -29,7 +28,7 @@ class ModelsTest {
     @Test
     void testMeatEaterNotEatPlants() {
         String result = lion.eat(grass);
-        assertEquals(Utils.NOT_EAT, result);
+        assertEquals(AnimalsHelper.NOT_EAT, result);
     }
 
     @Test
@@ -38,8 +37,8 @@ class ModelsTest {
         String secondEat = lion.eat(goat);
 
         assertNotEquals(firstEat, secondEat);
-        assertEquals(cow.getType().getName() + " " + Utils.HAS_BEEN_EATEN + " " + lion.getType().getName(), firstEat);
-        assertEquals(goat.getType().getName() + " " + Utils.HAS_BEEN_EATEN + " " + lion.getType().getName(), secondEat);
+        assertEquals(cow.getType().getName() + " " + AnimalsHelper.HAS_BEEN_EATEN + " " + lion.getType().getName(), firstEat);
+        assertEquals(goat.getType().getName() + " " + AnimalsHelper.HAS_BEEN_EATEN + " " + lion.getType().getName(), secondEat);
     }
 
     @Test
@@ -48,9 +47,9 @@ class ModelsTest {
         String cowEatResult = cow.eat(cow);
         String goatEatResult = goat.eat(goat);
 
-        assertEquals(Utils.NOT_EAT, lionEatResult);
-        assertEquals(Utils.NOT_EAT, cowEatResult);
-        assertEquals(Utils.NOT_EAT, goatEatResult);
+        assertEquals(AnimalsHelper.NOT_EAT, lionEatResult);
+        assertEquals(AnimalsHelper.NOT_EAT, cowEatResult);
+        assertEquals(AnimalsHelper.NOT_EAT, goatEatResult);
     }
 
     @Test
@@ -58,8 +57,8 @@ class ModelsTest {
         String cowEatResult = cow.eat(lion);
         String goatEatResult = goat.eat(cow);
 
-        assertEquals(Utils.NOT_EAT, cowEatResult);
-        assertEquals(Utils.NOT_EAT, goatEatResult);
+        assertEquals(AnimalsHelper.NOT_EAT, cowEatResult);
+        assertEquals(AnimalsHelper.NOT_EAT, goatEatResult);
     }
 
     @Test
@@ -68,7 +67,20 @@ class ModelsTest {
         String goatEatResult = goat.eat(grass);
 
         assertNotEquals(cowEatResult, goatEatResult);
-        assertEquals(Utils.HAS_BEEN_EATEN + " " + cow.getType().getName(), cowEatResult);
-        assertEquals(Utils.HAS_BEEN_EATEN + " " + goat.getType().getName(), goatEatResult);
+        assertEquals(AnimalsHelper.HAS_BEEN_EATEN + " " + cow.getType().getName(), cowEatResult);
+        assertEquals(AnimalsHelper.HAS_BEEN_EATEN + " " + goat.getType().getName(), goatEatResult);
+    }
+
+    @Test
+    void testNullAnimalType() {
+        IllegalArgumentException illegalArgumentException
+                = assertThrows(IllegalArgumentException.class, () -> lion = new MeatEaterAnimal(null));
+        assertEquals("This type can't be null", illegalArgumentException.getMessage());
+    }
+
+    @Test
+    void testNullFoodType() {
+        String resultEat = lion.eat(null);
+        assertEquals(AnimalsHelper.NOT_EAT, resultEat);
     }
 }

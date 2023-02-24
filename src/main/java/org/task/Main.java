@@ -10,9 +10,9 @@ public class Main {
         MeatEaterAnimal lion = new MeatEaterAnimal(MeatEater.LION);
         PlantEatingAnimal cow = new PlantEatingAnimal(PlantEating.COW);
         PlantEatingAnimal goat = new PlantEatingAnimal(PlantEating.GOAT);
-        lion.eat(cow);
-        lion.eat(lion);
-        cow.eat(cow);
-        cow.eat(goat);
+        System.out.println(lion.eat(cow));
+        System.out.println(lion.eat(lion));
+        System.out.println(cow.eat(cow));
+        System.out.println(cow.eat(goat));
     }
 }
